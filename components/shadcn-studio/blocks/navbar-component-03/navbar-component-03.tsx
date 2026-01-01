@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import { MapPinIcon, MenuIcon, PhoneIcon } from 'lucide-react'
-
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,

@@ -1,4 +1,5 @@
 import Navbar from "@/components/shadcn-studio/blocks/navbar-component-03/navbar-component-03";
+import HeroSection from "@/components/shadcn-studio/blocks/hero-section-33/hero-section-33";
 
 const businessHours = {
   label: "Open Daily",
@@ -38,14 +39,12 @@ const navigationData = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-background">
+      {/* Header Section */}
       <Navbar navigationData={navigationData} hours={businessHours} />
-      <main className="mx-auto max-w-5xl px-6 py-16">
-        <h1 className="text-3xl font-semibold text-foreground">
-          Home Page Content
-        </h1>
-        <p className="mt-4 text-muted-foreground">
-          Replace this section with your homepage content.
-        </p>
+
+      {/* Main Content */}
+      <main className="flex flex-col">
+        <HeroSection />
       </main>
     </div>
   );
