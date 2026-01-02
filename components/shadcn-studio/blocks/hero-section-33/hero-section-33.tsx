@@ -8,7 +8,7 @@ import { GlowEffect } from '@/components/ui/glow-effect'
 const HeroSection = () => {
   return (
     <section className='flex-1 overflow-hidden'>
-      <div className='relative z-1 flex h-full flex-col py-12 sm:py-16 lg:py-24'>
+      <div className='relative z-1 flex h-full flex-col py-8 sm:py-16 lg:py-24'>
         <div className='mx-auto grid max-w-7xl grid-cols-1 gap-12 px-4 max-xl:justify-center sm:gap-16 sm:px-6 lg:grid-cols-2 lg:gap-24 lg:px-8'>
           <div className='flex flex-col justify-between gap-8 sm:gap-16'>
             <div className='flex flex-col gap-4'>
@@ -19,7 +19,7 @@ const HeroSection = () => {
               </MotionPreset>
               <MotionPreset fade slide={{ offset: 50 }} blur transition={{ duration: 0.5 }} delay={0.5}>
                 <p className='text-muted-foreground text-xl'>
-                  Proudly serving the Lancaster, PA community!<br /><br />
+                  Proudly serving the Lancaster, PA community.<br /><br />
                   Enjoy brand-new, modern, high-capacity washers and dryers in a clean, comfortable space designed to make laundry faster and easier.<br /><br />
                   Open daily from 8:00 AM – 10:00 PM.<br /><br />
                 </p>

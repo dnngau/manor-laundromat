@@ -1,6 +1,49 @@
 import Navbar from "@/components/shadcn-studio/blocks/navbar-component-03/navbar-component-03";
 import HeroSection from "@/components/shadcn-studio/blocks/hero-section-33/hero-section-33";
 import Gallery from "@/components/shadcn-studio/blocks/gallery-component-05/gallery-component-05";
+import {
+  WashingMachineIcon,
+  MapPinIcon,
+  ZapIcon,
+  WifiIcon,
+  SparklesIcon,
+  CreditCardIcon
+} from 'lucide-react'
+
+import Features from '@/components/shadcn-studio/blocks/features-section-13/features-section-13'
+
+const featuresList = [
+  {
+    icon: WashingMachineIcon,
+    title: 'Brand New, Large Machines',
+    description: 'Featuring Dexter X-Series commercial washers up to 80 lbs. and 50 lb. dryers. Built to handle larger and bulkier loads.'
+  },
+  {
+    icon: SparklesIcon,
+    title: 'Fully Renovated Space',
+    description: 'Enjoy a refreshed, well-lit, and climate-controlled laundromat designed for comfort, safety, and cleanliness.'
+  },
+  {
+    icon: CreditCardIcon,
+    title: 'Flexible Payment Options',
+    description: 'Multiple ways to pay, including coin, cash, or card, powered by the Laundroworks payment system.'
+  },
+  {
+    icon: ZapIcon,
+    title: 'Fast, Efficient Wash & Dry',
+    description: 'Powerful wash and dry performance with quicker cycle times to help you get in and out faster — even on busy days.'
+  },
+  {
+    icon: WifiIcon,
+    title: 'Free Wi-Fi & Comfortable Seating',
+    description: 'Relax, stream, or get work done while your laundry runs — with free Wi-Fi and seating designed for longer loads.'
+  },
+  {
+    icon: MapPinIcon,
+    title: 'Convenient Lancaster Location',
+    description: 'A conveniently located laundromat with ample parking, minutes from Stone Mill Plaza and Downtown Lancaster.'
+  }
+]
 
 const businessHours = {
   label: "Open Daily",
@@ -79,6 +122,7 @@ export default function Home() {
       {/* Main Content */}
       <main className="flex flex-col">
         <HeroSection />
+        <Features featuresList={featuresList} />
         <Gallery galleryImage={galleryImages} />
       </main>
     </div>
