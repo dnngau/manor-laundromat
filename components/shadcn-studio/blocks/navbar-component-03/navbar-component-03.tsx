@@ -69,7 +69,7 @@ const Navbar = ({
               height={48}
               className='size-12 rounded-full object-cover ring-1 ring-black/10'
             />
-            <span className='ml-3 text-xl font-semibold max-sm:hidden'>Manor Laundromat</span>
+            <span className='ml-3 text-xl font-semibold'>Manor Laundromat</span>
           </div>
         </a>
 
@@ -122,6 +122,8 @@ const Navbar = ({
           </DropdownMenu>
         </div>
       </div>
+
+      <Separator />
     </header>
   )
 }

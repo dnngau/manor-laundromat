@@ -16,9 +16,11 @@ const HeroSection = () => {
                 Welcome to Manor Laundromat
               </h1>
               <p className='text-muted-foreground text-xl'>
-                Proudly serving the Lancaster, PA community.<br /><br />
+                A self-service laundromat proudly serving the Lancaster, PA community.<br /><br />
                 Enjoy brand-new, modern, high-capacity washers and dryers in a clean, comfortable space designed to make laundry faster and easier.<br /><br />
-                Open daily from 8:00 AM – 10:00 PM.<br /><br />
+                Open daily from 8:00 AM – 10:00 PM.<br />
+                Located on 876 Manor Street, Lancaster, PA 17603.
+                <br /><br />
               </p>
               <div className='flex flex-wrap items-center gap-4'>
                 <Button
