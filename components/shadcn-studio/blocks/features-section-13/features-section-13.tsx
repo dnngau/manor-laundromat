@@ -1,7 +1,6 @@
 import type { ComponentType } from 'react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Card, CardContent } from '@/components/ui/card'
-import { MotionPreset } from '@/components/ui/motion-preset'
 
 type Features = {
   icon: ComponentType<{ className?: string }>
@@ -27,14 +26,7 @@ const Features = ({ featuresList }: { featuresList: Features }) => {
         {/* Features Grid */}
         <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
           {featuresList.map((feature, index) => (
-            <MotionPreset
-              key={index}
-              fade
-              slide={{ direction: 'up', offset: 40 }}
-              blur
-              delay={0.6 + index * 0.1}
-              transition={{ duration: 0.5 }}
-            >
+            <div key={index}>
               <Card className='hover:border-primary h-full border shadow-none transition-colors duration-300'>
                 <CardContent className='flex gap-4'>
                   <Avatar className='size-9 rounded-md'>
@@ -48,7 +40,7 @@ const Features = ({ featuresList }: { featuresList: Features }) => {
                   </div>
                 </CardContent>
               </Card>
-            </MotionPreset>
+            </div>
           ))}
         </div>
       </div>

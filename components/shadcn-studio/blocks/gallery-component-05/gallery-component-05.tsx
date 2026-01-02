@@ -1,5 +1,5 @@
+import Image from 'next/image'
 import { cn } from '@/lib/utils'
-import { MotionPreset } from '@/components/ui/motion-preset'
 import { Button } from '@/components/ui/button'
 
 type GalleryImage = {
@@ -40,9 +40,11 @@ const Gallery = ({ galleryImage }: { galleryImage: GalleryImage }) => {
               key={index}
               className={cn('overflow-hidden rounded-lg', image.className)}
             >
-              <img
+              <Image
                 src={image.src}
                 alt={image.alt}
+                width={800}
+                height={600}
                 className='h-full w-full object-cover transition-transform duration-300 hover:scale-105'
               />
             </div>

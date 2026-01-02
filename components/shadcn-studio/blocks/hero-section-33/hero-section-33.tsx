@@ -2,8 +2,8 @@
 
 import HeroVector from '@/assets/svg/hero-vector'
 import { Button } from '@/components/ui/button'
-import { MotionPreset } from '@/components/ui/motion-preset'
 import { GlowEffect } from '@/components/ui/glow-effect'
+import Image from 'next/image'
 
 const HeroSection = () => {
   return (
@@ -44,13 +44,7 @@ const HeroSection = () => {
           </div>
           {/* TODO: Update Photos + Videos */}
           <div className='relative'>
-            <MotionPreset
-              fade
-              zoom
-              transition={{ duration: 0.5 }}
-              delay={0.3}
-              className='relative flex items-center rounded-lg border'
-            >
+            <div className='relative flex items-center rounded-lg border'>
               <video
                 poster='https://cdn.shadcnstudio.com/ss-assets/landing-page-videos/figma-plugin/generate-components-cover.png?width=701&format=auto'
                 autoPlay
@@ -101,13 +95,15 @@ const HeroSection = () => {
                   blur='medium'
                   className='opacity-80'
                 />
-                <img
+                <Image
                   src='https://cdn.shadcnstudio.com/ss-assets/landing-page/figma-plugin/hero-plugin.png?height=373&format=auto'
                   alt='plugin'
+                  width={373}
+                  height={373}
                   className='relative max-lg:h-full'
                 />
               </div>
-            </MotionPreset>
+            </div>
           </div>
         </div>
         <HeroVector className='absolute right-0 bottom-0 -z-1 opacity-30 max-lg:hidden' />

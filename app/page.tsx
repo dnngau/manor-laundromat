@@ -1,6 +1,9 @@
 import Navbar from "@/components/shadcn-studio/blocks/navbar-component-03/navbar-component-03";
 import HeroSection from "@/components/shadcn-studio/blocks/hero-section-33/hero-section-33";
+import Features from '@/components/shadcn-studio/blocks/features-section-13/features-section-13'
 import Gallery from "@/components/shadcn-studio/blocks/gallery-component-05/gallery-component-05";
+import Pricing from '@/components/shadcn-studio/blocks/pricing-component-05/pricing-component-05'
+
 import {
   WashingMachineIcon,
   MapPinIcon,
@@ -10,7 +13,79 @@ import {
   CreditCardIcon
 } from 'lucide-react'
 
-import Features from '@/components/shadcn-studio/blocks/features-section-13/features-section-13'
+
+const featureLabels = [
+  'Load Capacity',
+  'Machines Available',
+  'Ideal For',
+  'Comforter Friendly',
+  'Bulky Items',
+  'Payment Options'
+]
+
+const featureKeys = [
+  'loadCapacity',
+  'machinesAvailable',
+  'idealFor',
+  'comforterFriendly',
+  'bulkyItems',
+  'paymentOptions'
+]
+
+const plans = [
+  {
+    name: '30 lb Washer',
+    price: '$4.50',
+    period: 'per cycle',
+    features: {
+      loadCapacity: 'Small–Medium',
+      machinesAvailable: 5,
+      idealFor: 'Everyday laundry, towels',
+      comforterFriendly: false,
+      bulkyItems: false,
+      paymentOptions: 'Coin, Card, Cash'
+    }
+  },
+  {
+    name: '40 lb Washer',
+    price: '$6.00',
+    period: 'per cycle',
+    features: {
+      loadCapacity: 'Medium–Large',
+      machinesAvailable: 10,
+      idealFor: 'Large family loads',
+      comforterFriendly: false,
+      bulkyItems: true,
+      paymentOptions: 'Coin, Card, Cash'
+    }
+  },
+  {
+    name: '60 lb Washer',
+    price: '$8.00',
+    period: 'per cycle',
+    features: {
+      loadCapacity: 'Large',
+      machinesAvailable: 3,
+      idealFor: 'Comforters, blankets',
+      comforterFriendly: true,
+      bulkyItems: true,
+      paymentOptions: 'Coin, Card, Cash'
+    },
+  },
+  {
+    name: '80 lb Washer',
+    price: '$11.00',
+    period: 'per cycle',
+    features: {
+      loadCapacity: 'Extra Large',
+      machinesAvailable: 2,
+      idealFor: 'Bulky items, oversized loads',
+      comforterFriendly: true,
+      bulkyItems: true,
+      paymentOptions: 'Coin, Card, Cash'
+    }
+  }
+]
 
 const featuresList = [
   {
@@ -59,11 +134,11 @@ const navigationData = [
     href: "#",
   },
   {
-    title: "Photos",
+    title: "Services",
     href: "#",
   },
   {
-    title: "Services",
+    title: "Photos",
     href: "#",
   },
   {
@@ -124,6 +199,7 @@ export default function Home() {
         <HeroSection />
         <Features featuresList={featuresList} />
         <Gallery galleryImage={galleryImages} />
+        <Pricing plans={plans} featureKeys={featureKeys} featureLabels={featureLabels} />
       </main>
     </div>
   );
