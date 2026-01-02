@@ -15,29 +15,13 @@ const Features = ({ featuresList }: { featuresList: Features }) => {
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         {/* Header */}
         <div className='mb-12 space-y-4 text-center sm:mb-16 lg:mb-24'>
-          <MotionPreset
-            component='h2'
-            className='text-2xl font-semibold md:text-3xl lg:text-4xl'
-            fade
-            slide={{ direction: 'down', offset: 50 }}
-            blur
-            delay={0.2}
-            transition={{ duration: 0.6 }}
-          >
+          <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>
             A Better Laundromat Experience in Lancaster
-          </MotionPreset>
+          </h2>
 
-          <MotionPreset
-            component='p'
-            className='text-muted-foreground mx-auto max-w-3xl text-xl'
-            fade
-            blur
-            slide={{ direction: 'down', offset: 50 }}
-            delay={0.3}
-            transition={{ duration: 0.5 }}
-          >
+          <p className='text-muted-foreground mx-auto max-w-3xl text-xl'>
             A clean, upgraded space with large-capacity machines and simple amenities designed to make laundry easier.
-          </MotionPreset>
+          </p>
         </div>
 
         {/* Features Grid */}

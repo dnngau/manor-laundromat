@@ -14,50 +14,13 @@ const Gallery = ({ galleryImage }: { galleryImage: GalleryImage }) => {
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         {/* Header */}
         <div className='mb-12 space-y-4 text-center sm:mb-16 lg:mb-24'>
-          <MotionPreset
-            component='p'
-            className='text-primary text-sm font-medium uppercase'
-            fade
-            zoom={{ initialScale: 0.95 }}
-            blur
-            transition={{ duration: 0.5 }}
-          >
-            Photos
-          </MotionPreset>
-
-          <MotionPreset
-            component='h2'
-            className='text-2xl font-semibold md:text-3xl lg:text-4xl'
-            fade
-            zoom={{ initialScale: 0.95 }}
-            blur
-            transition={{ duration: 0.5 }}
-            delay={0.3}
-          >
+          <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>
             A Look Inside Manor Laundromat
-          </MotionPreset>
-
-          <MotionPreset
-            component='p'
-            className='text-muted-foreground text-xl'
-            fade
-            blur
-            zoom={{ initialScale: 0.95 }}
-            delay={0.6}
-            transition={{ duration: 0.5 }}
-          >
+          </h2>
+          <p className='text-muted-foreground text-xl'>
             Explore our newly renovated space.
-          </MotionPreset>
-
-          <MotionPreset
-            component='div'
-            fade
-            slide={{ offset: 50 }}
-            blur
-            transition={{ duration: 0.5 }}
-            delay={0.7}
-            className='flex flex-wrap items-center justify-center gap-4'
-          >
+          </p>
+          <div className='flex flex-wrap items-center justify-center gap-4'>
             <Button
               asChild
               size='lg'
@@ -67,27 +30,22 @@ const Gallery = ({ galleryImage }: { galleryImage: GalleryImage }) => {
                 View All
               </a>
             </Button>
-          </MotionPreset>
+          </div>
         </div>
 
         {/* Gallery Grid */}
         <div className='grid grid-cols-2 gap-6 sm:grid-cols-4 md:grid-cols-6'>
           {galleryImage.map((image, index) => (
-            <MotionPreset
+            <div
               key={index}
               className={cn('overflow-hidden rounded-lg', image.className)}
-              fade
-              blur
-              zoom={{ initialScale: 0.9 }}
-              transition={{ duration: 0.9 }}
-              delay={0.9}
             >
               <img
                 src={image.src}
                 alt={image.alt}
                 className='h-full w-full object-cover transition-transform duration-300 hover:scale-105'
               />
-            </MotionPreset>
+            </div>
           ))}
         </div>
       </div>
