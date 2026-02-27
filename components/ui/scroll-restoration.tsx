@@ -1,12 +1,10 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect } from "react";
 
 const ScrollRestoration = () => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const search = searchParams.toString();
 
   const scrollToElementWithOffset = useCallback((element: HTMLElement) => {
     const stickyHeader = document.querySelector("header.sticky") as HTMLElement | null;
@@ -51,15 +49,22 @@ const ScrollRestoration = () => {
   useEffect(() => {
     const rafId = window.requestAnimationFrame(handleLocationScroll);
     return () => window.cancelAnimationFrame(rafId);
-  }, [handleLocationScroll, pathname, search]);
+  }, [handleLocationScroll, pathname]);
 
   useEffect(() => {
     const onHashChange = () => {
       window.requestAnimationFrame(handleLocationScroll);
     };
+    const onPopState = () => {
+      window.requestAnimationFrame(handleLocationScroll);
+    };
 
     window.addEventListener("hashchange", onHashChange);
-    return () => window.removeEventListener("hashchange", onHashChange);
+    window.addEventListener("popstate", onPopState);
+    return () => {
+      window.removeEventListener("hashchange", onHashChange);
+      window.removeEventListener("popstate", onPopState);
+    };
   }, [handleLocationScroll]);
 
   return null;
