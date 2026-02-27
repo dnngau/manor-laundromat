@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { type TouchEvent, useCallback, useEffect, useRef, useState } from 'react'
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 
@@ -8,17 +9,97 @@ const slides = ['/hero-carousel-1.svg', '/hero-carousel-2.svg', '/hero-carousel-
 
 const HeroSection = () => {
   const [activeSlide, setActiveSlide] = useState(0)
+  const touchStartX = useRef<number | null>(null)
+  const touchEndX = useRef<number | null>(null)
+  const autoAdvanceTimer = useRef<number | null>(null)
 
-  useEffect(() => {
-    const timer = window.setInterval(() => {
+  const restartAutoAdvance = useCallback(() => {
+    if (autoAdvanceTimer.current !== null) {
+      window.clearInterval(autoAdvanceTimer.current)
+    }
+
+    autoAdvanceTimer.current = window.setInterval(() => {
       setActiveSlide(previous => (previous + 1) % slides.length)
     }, 4500)
-
-    return () => window.clearInterval(timer)
   }, [])
 
+  const goToNextSlide = useCallback((resetTimer = false) => {
+    setActiveSlide(previous => (previous + 1) % slides.length)
+    if (resetTimer) restartAutoAdvance()
+  }, [restartAutoAdvance])
+
+  const goToPreviousSlide = useCallback((resetTimer = false) => {
+    setActiveSlide(previous => (previous - 1 + slides.length) % slides.length)
+    if (resetTimer) restartAutoAdvance()
+  }, [restartAutoAdvance])
+
+  useEffect(() => {
+    restartAutoAdvance()
+
+    return () => {
+      if (autoAdvanceTimer.current !== null) {
+        window.clearInterval(autoAdvanceTimer.current)
+      }
+    }
+  }, [restartAutoAdvance])
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (!window.matchMedia('(min-width: 1024px)').matches) {
+        return
+      }
+
+      if (event.key === 'ArrowRight') {
+        event.preventDefault()
+        goToNextSlide(true)
+      }
+
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault()
+        goToPreviousSlide(true)
+      }
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [goToNextSlide, goToPreviousSlide])
+
+  const handleTouchStart = (event: TouchEvent<HTMLElement>) => {
+    touchStartX.current = event.touches[0]?.clientX ?? null
+    touchEndX.current = null
+  }
+
+  const handleTouchMove = (event: TouchEvent<HTMLElement>) => {
+    touchEndX.current = event.touches[0]?.clientX ?? null
+  }
+
+  const handleTouchEnd = () => {
+    if (touchStartX.current === null || touchEndX.current === null) {
+      return
+    }
+
+    const swipeDistance = touchStartX.current - touchEndX.current
+    const minSwipeDistance = 45
+
+    if (Math.abs(swipeDistance) < minSwipeDistance) {
+      return
+    }
+
+    if (swipeDistance > 0) {
+      goToNextSlide(true)
+      return
+    }
+
+    goToPreviousSlide(true)
+  }
+
   return (
-    <section className='relative overflow-hidden'>
+    <section
+      className='relative overflow-hidden'
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className='relative mx-auto h-[calc(100dvh-180px)] min-h-[620px] max-w-7xl sm:h-[calc(100dvh-190px)] sm:min-h-[660px] lg:h-[calc(100dvh-170px)] lg:min-h-[680px]'>
         {slides.map((slide, index) => (
           <Image
@@ -45,11 +126,11 @@ const HeroSection = () => {
               size='lg'
               asChild
             >
-              <a href='#'>View More Photos</a>
+              <a href='/photos'>View More Photos</a>
             </Button>
           </div>
         </div>
-        <div className='pointer-events-none absolute right-0 bottom-6 left-0 z-10 flex items-center justify-center gap-2 sm:bottom-4'>
+        <div className='pointer-events-none absolute right-0 bottom-6 left-0 z-20 flex items-center justify-center gap-2 sm:bottom-4 md:hidden'>
           {slides.map((slide, index) => (
             <span
               key={slide}
@@ -57,6 +138,27 @@ const HeroSection = () => {
               aria-hidden='true'
             />
           ))}
+        </div>
+        <div className='absolute right-0 bottom-6 left-0 z-20 hidden items-center justify-center gap-2 text-white sm:bottom-4 md:flex'>
+          <button
+            type='button'
+            onClick={() => goToPreviousSlide(true)}
+            aria-label='Previous photo'
+            className='inline-flex size-8 items-center justify-center rounded-full bg-black/45 transition-colors hover:bg-black/65'
+          >
+            <ChevronLeftIcon className='size-4' />
+          </button>
+          <span className='rounded-full bg-black/45 px-3 py-1 text-sm font-semibold'>
+            {activeSlide + 1} of {slides.length}
+          </span>
+          <button
+            type='button'
+            onClick={() => goToNextSlide(true)}
+            aria-label='Next photo'
+            className='inline-flex size-8 items-center justify-center rounded-full bg-black/45 transition-colors hover:bg-black/65'
+          >
+            <ChevronRightIcon className='size-4' />
+          </button>
         </div>
       </div>
     </section>

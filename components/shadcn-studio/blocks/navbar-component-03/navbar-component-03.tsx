@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { type MouseEvent, useEffect, useState } from 'react'
 import { MapPinIcon, MenuIcon, PhoneIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -55,6 +55,49 @@ const Navbar = ({
     return pathname === href
   }
 
+  const handleLogoClick = () => {
+    setCurrentHash('')
+
+    if (pathname === '/') {
+      window.history.replaceState(null, '', '/')
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+    }
+  }
+
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    const [targetPath, targetHash] = href.split('#')
+    const normalizedTargetPath = targetPath || '/'
+    const currentPath = pathname || '/'
+
+    if (normalizedTargetPath !== currentPath) {
+      return
+    }
+
+    event.preventDefault()
+
+    if (!targetHash) {
+      setCurrentHash('')
+      window.history.replaceState(null, '', normalizedTargetPath)
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+      return
+    }
+
+    const anchorId = decodeURIComponent(targetHash)
+    const anchorHash = `#${anchorId}`
+    const target =
+      anchorId === 'machines' || anchorId === 'pricing' || anchorId === 'machines-pricing-heading'
+        ? document.getElementById('machines-pricing-heading')
+        : document.getElementById(anchorId)
+
+    const stickyHeader = document.querySelector('header.sticky') as HTMLElement | null
+    const headerOffset = stickyHeader ? stickyHeader.getBoundingClientRect().height + 16 : 0
+    const targetTop = target ? target.getBoundingClientRect().top + window.scrollY - headerOffset : 0
+
+    setCurrentHash(anchorHash)
+    window.history.replaceState(null, '', `/${anchorHash}`)
+    window.scrollTo({ top: Math.max(targetTop, 0), left: 0, behavior: 'auto' })
+  }
+
   return (
     <header className='bg-background sticky top-0 z-50'>
       <div className='flex w-full items-center justify-between gap-4 bg-[#106090] px-4 py-3 text-[#f5fbff] sm:gap-8 sm:px-6'>
@@ -85,7 +128,7 @@ const Navbar = ({
       <Separator className='bg-white/20' />
 
       <div className='flex w-full items-center justify-between gap-8 px-4 py-7 sm:px-6'>
-        <Link href='/' onClick={() => setCurrentHash('')}>
+        <Link href='/' onClick={handleLogoClick}>
           <div className='flex items-center'>
             <Image
               src='/ManorLaundromat_Logo.png'
@@ -112,6 +155,7 @@ const Navbar = ({
               <div key={index} className='text-muted-foreground flex items-center gap-6 font-medium max-md:hidden'>
                 <Link
                   href={item.href}
+                  onClick={event => handleNavClick(event, item.href)}
                   className={cn('hover:text-primary', {
                     'text-primary font-semibold': isActiveLink(item.href)
                   })}
@@ -142,7 +186,9 @@ const Navbar = ({
                       'bg-muted font-semibold': isActiveLink(item.href)
                     })}
                   >
-                    <Link href={item.href}>{item.title}</Link>
+                    <Link href={item.href} onClick={event => handleNavClick(event, item.href)}>
+                      {item.title}
+                    </Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
               ))}
