@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { type MouseEvent, useEffect, useState } from 'react'
+import { type MouseEvent, useEffect, useState, useSyncExternalStore } from 'react'
 import { MapPinIcon, MenuIcon, PhoneIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -38,6 +38,11 @@ const Navbar = ({
 }) => {
   const pathname = usePathname()
   const [currentHash, setCurrentHash] = useState('')
+  const isMounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  )
 
   useEffect(() => {
     const syncHash = () => setCurrentHash(window.location.hash)
@@ -170,30 +175,32 @@ const Navbar = ({
             ))}
           </div>
 
-          <DropdownMenu>
-            <DropdownMenuTrigger className='md:hidden' asChild>
-              <Button variant='outline' size='icon'>
-                <MenuIcon />
-                <span className='sr-only'>Menu</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className='w-56' align='end'>
-              {navigationData.map((item, index) => (
-                <DropdownMenuGroup key={index}>
-                  <DropdownMenuItem
-                    asChild
-                    className={cn({
-                      'bg-muted font-semibold': isActiveLink(item.href)
-                    })}
-                  >
-                    <Link href={item.href} onClick={event => handleNavClick(event, item.href)}>
-                      {item.title}
-                    </Link>
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {isMounted && (
+            <DropdownMenu>
+              <DropdownMenuTrigger className='md:hidden' asChild>
+                <Button variant='outline' size='icon'>
+                  <MenuIcon />
+                  <span className='sr-only'>Menu</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className='w-56' align='end'>
+                {navigationData.map((item, index) => (
+                  <DropdownMenuGroup key={index}>
+                    <DropdownMenuItem
+                      asChild
+                      className={cn({
+                        'bg-muted font-semibold': isActiveLink(item.href)
+                      })}
+                    >
+                      <Link href={item.href} onClick={event => handleNavClick(event, item.href)}>
+                        {item.title}
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
         </div>
       </div>
 

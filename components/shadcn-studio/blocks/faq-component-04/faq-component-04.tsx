@@ -15,17 +15,16 @@ type Tabs = {
 
 const FAQ = ({ tabs }: { tabs: Tabs }) => {
   return (
-    <section className='py-8 sm:py-16 lg:py-24'>
+    <section className='py-12'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
-        {/* Header */}
-        <div className='mb-12 text-center sm:mb-16 lg:mb-24'>
-          <h1 className='mb-4 text-2xl font-semibold md:text-3xl lg:text-4xl'>Commonly Asked Questions</h1>
-          <p className='text-muted-foreground text-xl'>
-            Utilize artificial intelligence algorithms to deliver valuable insights to users.
+        <div className='text-center'>
+          <h1 className='text-3xl font-semibold'>Frequently Asked Questions</h1>
+          <p className='text-muted-foreground mt-3 text-lg'>
+            Everything you need to know for a smooth laundry day
           </p>
         </div>
 
-        <Tabs defaultValue='dashboard' className='gap-8'>
+        <Tabs defaultValue='general' className='mt-8 gap-8'>
           <TabsList className='self-center'>
             {tabs.map(tab => (
               <TabsTrigger key={tab.value} value={tab.value}>
@@ -36,7 +35,7 @@ const FAQ = ({ tabs }: { tabs: Tabs }) => {
 
           {tabs.map(tab => (
             <TabsContent key={tab.value} value={tab.value}>
-              <Accordion type='single' collapsible className='w-full space-y-2' defaultValue='item-1'>
+              <Accordion type='single' collapsible className='w-full space-y-2'>
                 {tab.faqs.map((item, index) => (
                   <AccordionItem
                     key={index}

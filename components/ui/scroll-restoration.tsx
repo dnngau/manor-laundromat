@@ -1,11 +1,10 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect } from "react";
 
 const ScrollRestoration = () => {
   const pathname = usePathname();
-  const isInitialLoad = useRef(true);
 
   const scrollToElementWithOffset = useCallback((element: HTMLElement) => {
     const stickyHeader = document.querySelector("header.sticky") as HTMLElement | null;
@@ -15,16 +14,7 @@ const ScrollRestoration = () => {
     window.scrollTo({ top: Math.max(targetTop, 0), left: 0, behavior: "auto" });
   }, []);
 
-  const handleLocationScroll = useCallback((isFirstLoad = false) => {
-    if (isFirstLoad && pathname === "/") {
-      const navigationEntry = performance.getEntriesByType("navigation")[0] as PerformanceNavigationTiming | undefined;
-      if (navigationEntry?.type === "reload") {
-        window.history.replaceState(null, "", "/");
-        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-        return;
-      }
-    }
-
+  const handleLocationScroll = useCallback(() => {
     const hash = decodeURIComponent(window.location.hash.replace("#", ""));
 
     if (!hash) {
@@ -48,7 +38,7 @@ const ScrollRestoration = () => {
     }
 
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, [pathname, scrollToElementWithOffset]);
+  }, [scrollToElementWithOffset]);
 
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
@@ -57,9 +47,7 @@ const ScrollRestoration = () => {
   }, []);
 
   useEffect(() => {
-    const firstLoad = isInitialLoad.current;
-    isInitialLoad.current = false;
-    const rafId = window.requestAnimationFrame(() => handleLocationScroll(firstLoad));
+    const rafId = window.requestAnimationFrame(handleLocationScroll);
     return () => window.cancelAnimationFrame(rafId);
   }, [handleLocationScroll, pathname]);
 

@@ -3,7 +3,8 @@ import { businessHours, navigationData } from '@/lib/site-config'
 
 export default function HoursLocationPage() {
   const googleMapsUrl = 'https://maps.app.goo.gl/y92K6Nwp8c91Cg1k8'
-  const embeddedMapUrl = 'https://www.google.com/maps?q=876+Manor+Street+Lancaster+PA+17603&z=15&output=embed'
+  const embeddedMapUrl =
+    'https://www.google.com/maps?q=876+Manor+Street+Lancaster+PA+17603&z=15&output=embed&gestureHandling=greedy'
 
   return (
     <div className='min-h-screen bg-background'>
@@ -39,9 +40,10 @@ export default function HoursLocationPage() {
             <iframe
               title='Manor Laundromat Location on Google Maps'
               src={embeddedMapUrl}
-              className='h-[420px] w-full sm:h-[520px]'
+              className='h-[420px] w-full border-0 touch-none sm:h-[520px]'
               loading='lazy'
               referrerPolicy='no-referrer-when-downgrade'
+              allowFullScreen
             />
           </section>
         </div>
