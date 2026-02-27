@@ -15,7 +15,7 @@ const Features = ({ featuresList }: { featuresList: Features }) => {
         {/* Header */}
         <div className='mb-12 space-y-4 text-center sm:mb-16 lg:mb-24'>
           <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>
-            A Better Laundromat Experience in Lancaster
+            A Better Laundromat Experience in Lancaster, PA
           </h2>
 
           <p className='text-muted-foreground mx-auto max-w-3xl text-xl'>

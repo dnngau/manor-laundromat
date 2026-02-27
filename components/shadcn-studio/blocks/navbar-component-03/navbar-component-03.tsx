@@ -1,4 +1,9 @@
+'use client'
+
 import Image from 'next/image'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { MapPinIcon, MenuIcon, PhoneIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -9,6 +14,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Separator } from '@/components/ui/separator'
+import { cn } from '@/lib/utils'
 
 type HoursItem = {
   label: string
@@ -30,10 +36,29 @@ const Navbar = ({
   navigationData: NavigationItem
   hours: HoursItem
 }) => {
+  const pathname = usePathname()
+  const [currentHash, setCurrentHash] = useState('')
+
+  useEffect(() => {
+    const syncHash = () => setCurrentHash(window.location.hash)
+
+    syncHash()
+    window.addEventListener('hashchange', syncHash)
+    return () => window.removeEventListener('hashchange', syncHash)
+  }, [pathname])
+
+  const isActiveLink = (href: string) => {
+    if (href.startsWith('/#')) {
+      return pathname === '/' && currentHash === href.replace('/', '')
+    }
+
+    return pathname === href
+  }
+
   return (
     <header className='bg-background sticky top-0 z-50'>
-      <div className='mx-auto flex max-w-7xl items-center justify-between gap-8 px-4 py-3 max-md:hidden sm:px-6'>
-        <div className='text-muted-foreground flex items-center gap-6 font-medium'>
+      <div className='flex w-full items-center justify-between gap-4 bg-[#106090] px-4 py-3 text-[#f5fbff] sm:gap-8 sm:px-6'>
+        <div className='flex items-center gap-6 text-sm font-medium sm:text-base'>
           <span>
             {hours.label}{' '}
             <time dateTime={hours.startTime}>{hours.startLabel}</time> –{' '}
@@ -41,66 +66,64 @@ const Navbar = ({
           </span>
         </div>
 
-        <div className='text-muted-foreground flex items-center gap-4'>
+        <div className='flex items-center gap-4'>
           <a
-            href='https://www.google.com/maps/search/?api=1&query=876+Manor+St.+Lancaster,+PA+17603'
-            className='hover:text-primary'
+            href='https://maps.app.goo.gl/y92K6Nwp8c91Cg1k8'
+            className='text-[#f5fbff] hover:text-white'
             aria-label='Open in Maps'
             target='_blank'
             rel='noopener noreferrer'
           >
             <MapPinIcon className='size-5' />
           </a>
-          <a href='tel:7179257480' className='hover:text-primary' aria-label='Call Manor Laundromat'>
+          <a href='tel:7179257480' className='text-[#f5fbff] hover:text-white' aria-label='Call Manor Laundromat'>
             <PhoneIcon className='size-5' />
           </a>
         </div>
       </div>
 
-      <Separator className='max-md:hidden' />
+      <Separator className='bg-white/20' />
 
-      <div className='mx-auto flex max-w-7xl items-center justify-between gap-8 px-4 py-7 sm:px-6'>
-        <a href='#'>
+      <div className='flex w-full items-center justify-between gap-8 px-4 py-7 sm:px-6'>
+        <Link href='/' onClick={() => setCurrentHash('')}>
           <div className='flex items-center'>
             <Image
-              src='/manor-laundromat-logo.png' // TODO: FIX LOGO IMAGE
+              src='/ManorLaundromat_Logo.png'
               alt='Manor Laundromat'
-              width={48}
-              height={48}
-              className='size-12 rounded-full object-cover ring-1 ring-black/10'
+              width={7500}
+              height={1348}
+              className='hidden h-14 w-auto md:block'
+              priority
             />
-            <span className='ml-3 text-xl font-semibold'>Manor Laundromat</span>
+            <Image
+              src='/ManorLaundromat_Logo.png'
+              alt='Manor Laundromat'
+              width={7500}
+              height={1348}
+              className='h-10 w-auto max-w-[220px] md:hidden'
+              priority
+            />
           </div>
-        </a>
+        </Link>
 
         <div className='flex items-center gap-6'>
           <div className='text-muted-foreground flex items-center gap-5 font-medium max-md:hidden'>
             {navigationData.map((item, index) => (
               <div key={index} className='text-muted-foreground flex items-center gap-6 font-medium max-md:hidden'>
-                <a href={item.href} className='hover:text-primary'>
+                <Link
+                  href={item.href}
+                  className={cn('hover:text-primary', {
+                    'text-primary font-semibold': isActiveLink(item.href)
+                  })}
+                >
                   {item.title}
-                </a>
+                </Link>
 
                 {index < navigationData.length - 1 && (
                   <Separator orientation='vertical' className='!h-6 max-md:hidden' />
                 )}
               </div>
             ))}
-          </div>
-
-          <div className='text-muted-foreground flex items-center gap-4 md:hidden'>
-            <a
-              href='https://www.google.com/maps/search/?api=1&query=876+Manor+St.+Lancaster,+PA+17603'
-              className='hover:text-primary'
-              aria-label='Open in Maps'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <MapPinIcon className='size-5' />
-            </a>
-            <a href='tel:7179257480' className='hover:text-primary' aria-label='Call Manor Laundromat'>
-              <PhoneIcon className='size-5' />
-            </a>
           </div>
 
           <DropdownMenu>
@@ -113,8 +136,13 @@ const Navbar = ({
             <DropdownMenuContent className='w-56' align='end'>
               {navigationData.map((item, index) => (
                 <DropdownMenuGroup key={index}>
-                  <DropdownMenuItem>
-                    <a href={item.href}>{item.title}</a>
+                  <DropdownMenuItem
+                    asChild
+                    className={cn({
+                      'bg-muted font-semibold': isActiveLink(item.href)
+                    })}
+                  >
+                    <Link href={item.href}>{item.title}</Link>
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
               ))}
