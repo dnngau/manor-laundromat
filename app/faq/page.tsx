@@ -41,7 +41,7 @@ const tabsData = [
       {
         id: 'dryers',
         question: 'How are dryers priced?',
-        answer: 'Dryers are priced at a flat rate of $1.00 for every 30 minutes.'
+        answer: 'Dryers are priced at a flat rate of $1.75 for every 30 minutes. Additional time can be added at $0.25 per 6 minutes'
       }
     ]
   },
@@ -52,7 +52,7 @@ const tabsData = [
       {
         id: 'payment-methods',
         question: 'What payment methods do you accept?',
-        answer: 'We accept coin, cash, and card.'
+        answer: 'We accept cash and card (credit & debit).'
       },
       {
         id: 'attendant',

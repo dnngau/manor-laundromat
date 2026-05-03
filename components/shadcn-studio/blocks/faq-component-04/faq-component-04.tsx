@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
@@ -56,10 +57,10 @@ const FAQ = ({ tabs }: { tabs: Tabs }) => {
         {/* Support Link */}
         <div className='mt-12 text-center sm:mt-16 lg:mt-24'>
           <p className='text-muted-foreground'>
-            Didn&apos;t find the answer you are looking for?{' '}
-            <a href='#' className='text-foreground font-semibold'>
-              Contact our support
-            </a>
+            Didn&apos;t find the answer you were looking for?{' '}
+            <Link href='/contact' className='text-foreground font-semibold hover:underline'>
+              Contact us
+            </Link>
           </p>
         </div>
       </div>

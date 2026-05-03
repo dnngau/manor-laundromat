@@ -34,7 +34,7 @@ const featureKeys = [
 const plans = [
   {
     name: '30 lb Washer',
-    price: '$4.50',
+    price: '$4.75',
     period: 'per cycle',
     features: {
       loadCapacity: 'Small-Medium',
@@ -42,12 +42,12 @@ const plans = [
       idealFor: 'Everyday laundry, towels',
       comforterFriendly: false,
       bulkyItems: false,
-      paymentOptions: 'Coin, Card, Cash'
+      paymentOptions: 'Card, Cash, or Smartphone'
     }
   },
   {
     name: '40 lb Washer',
-    price: '$6.00',
+    price: '$6.25',
     period: 'per cycle',
     features: {
       loadCapacity: 'Medium-Large',
@@ -55,7 +55,7 @@ const plans = [
       idealFor: 'Large family loads',
       comforterFriendly: false,
       bulkyItems: true,
-      paymentOptions: 'Coin, Card, Cash'
+      paymentOptions: 'Card, Cash, or Smartphone'
     }
   },
   {
@@ -68,7 +68,7 @@ const plans = [
       idealFor: 'Comforters, blankets',
       comforterFriendly: true,
       bulkyItems: true,
-      paymentOptions: 'Coin, Card, Cash'
+      paymentOptions: 'Card, Cash, or Smartphone'
     }
   },
   {
@@ -81,7 +81,7 @@ const plans = [
       idealFor: 'Bulky items, oversized loads',
       comforterFriendly: true,
       bulkyItems: true,
-      paymentOptions: 'Coin, Card, Cash'
+      paymentOptions: 'Card, Cash, or Smartphone'
     }
   }
 ]
@@ -102,7 +102,7 @@ const featuresList = [
   {
     icon: CreditCardIcon,
     title: 'Flexible Payment Options',
-    description: 'Multiple ways to pay, including coin, cash, or card, powered by the Laundroworks payment system.'
+    description: 'Multiple ways to pay, including cash, card, or smartphone via an app, powered by the Laundroworks payment system.'
   },
   {
     icon: ZapIcon,
@@ -137,6 +137,26 @@ export default function Home() {
         </div>
         <div className='bg-background'>
           <Pricing plans={plans} featureKeys={featureKeys} featureLabels={featureLabels} />
+        </div>
+        <div className='bg-muted'>
+          <div className='container mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-16 lg:px-8 lg:py-24'>
+            <div className='flex flex-col items-center gap-4'>
+              <h2 className='text-2xl font-semibold sm:text-3xl lg:text-4xl'>Dryer Sizes & Prices</h2>
+              <p className='text-muted-foreground text-center text-lg sm:text-xl'>All dryers hold up to 50 lbs, enough room for a full load, comforters, and bulky items.</p>
+            </div>
+            <div className='mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6'>
+              <div className='bg-background border-border flex w-full max-w-xs flex-col items-center gap-2 rounded-2xl border px-8 py-8 shadow-sm'>
+                <span className='text-muted-foreground text-sm font-semibold uppercase tracking-widest'>Start</span>
+                <span className='text-4xl font-bold'>$1.75</span>
+                <span className='text-muted-foreground font-medium'>30 minutes</span>
+              </div>
+              <div className='bg-background border-border flex w-full max-w-xs flex-col items-center gap-2 rounded-2xl border px-8 py-8 shadow-sm'>
+                <span className='text-muted-foreground text-sm font-semibold uppercase tracking-widest'>Add Time</span>
+                <span className='text-4xl font-bold'>+$0.25</span>
+                <span className='text-muted-foreground font-medium'>per 6 minutes</span>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </div>

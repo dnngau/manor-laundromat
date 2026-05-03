@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { type MouseEvent, useEffect, useState, useSyncExternalStore } from 'react'
-import { MapPinIcon, MenuIcon, PhoneIcon } from 'lucide-react'
+import { InstagramIcon, MapPinIcon, MenuIcon, PhoneIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -126,6 +126,15 @@ const Navbar = ({
           </a>
           <a href='tel:7179257480' className='text-[#f5fbff] hover:text-white' aria-label='Call Manor Laundromat'>
             <PhoneIcon className='size-5' />
+          </a>
+          <a
+            href='https://www.instagram.com/manor_laundromat/'
+            className='text-[#f5fbff] hover:text-white'
+            aria-label='Manor Laundromat on Instagram'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <InstagramIcon className='size-5' />
           </a>
         </div>
       </div>
