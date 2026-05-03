@@ -80,7 +80,7 @@ const Pricing = ({
                   value={plan.name}
                   className='data-[state=active]:bg-background data-[state=active]:text-foreground h-11 min-w-0 flex-1 rounded-xl border-0 px-1.5 py-2 text-center text-[15px] font-semibold whitespace-nowrap data-[state=active]:shadow-sm'
                 >
-                  <span>{getPlanSizeLabel(plan.name).replace('Extra Large', 'Ex. Large')}</span>
+                  <span>{getPlanSizeLabel(plan.name).replace('Extra Large', 'X-Large')}</span>
                 </TabsTrigger>
               ))}
             </TabsList>

@@ -1,21 +1,28 @@
 import Navbar from '@/components/shadcn-studio/blocks/navbar-component-03/navbar-component-03'
 import { businessHours, navigationData } from '@/lib/site-config'
 
+export const metadata = {
+  title: 'Hours & Location',
+  description:
+    'Manor Laundromat is open daily 6AM–10PM at 876 Manor Street, Lancaster, PA 17603. Get directions and find us on Google Maps.',
+  alternates: { canonical: 'https://www.manor-laundromat.com/hours-location' },
+}
+
 export default function HoursLocationPage() {
   const googleMapsUrl = 'https://maps.app.goo.gl/y92K6Nwp8c91Cg1k8'
   const embeddedMapUrl =
     'https://www.google.com/maps?q=876+Manor+Street+Lancaster+PA+17603&z=15&output=embed&gestureHandling=greedy'
 
   return (
-    <div className='min-h-screen bg-background'>
+    <div className='min-h-screen bg-background bubble-bg'>
       <Navbar navigationData={navigationData} hours={businessHours} />
-      <main className='mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8'>
+      <main className='mx-auto max-w-7xl bg-background px-4 py-12 sm:px-6 lg:px-8'>
         <h1 className='text-3xl font-semibold'>Hours & Location</h1>
         <p className='text-muted-foreground mt-3 text-lg'>Find us quickly, check our hours, and get directions in one tap.</p>
 
         <div className='mt-8 grid gap-8 lg:grid-cols-[1fr_1.4fr]'>
           <section className='border-border bg-card rounded-2xl border p-6'>
-            <h2 className='text-xl font-semibold'>Visit Manor Laundromat</h2>
+            <h2 className='text-xl font-semibold'>Visit Your Lancaster, PA Laundromat</h2>
             <div className='mt-6 space-y-5 text-lg'>
               <p>
                 <strong>Open Daily:</strong> 6:00 AM - 10:00 PM

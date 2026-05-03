@@ -5,7 +5,11 @@ import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 
-const slides = ['/hero-carousel-1.jpeg', '/hero-carousel-2.jpeg', '/hero-carousel-3.jpeg']
+const slides = [
+  { src: '/hero-carousel-1.jpeg', alt: 'Exterior storefront of Manor Laundromat at 876 Manor Street, Lancaster PA, with open sign and parking' },
+  { src: '/hero-carousel-2.jpeg', alt: 'Row of 40 lb Dexter washers inside Manor Laundromat in Lancaster, PA with seating area' },
+  { src: '/hero-carousel-3.jpeg', alt: '60 lb and 80 lb large-capacity Dexter washers at Manor Laundromat, Lancaster PA' },
+]
 
 const HeroSection = () => {
   const [activeSlide, setActiveSlide] = useState(0)
@@ -99,14 +103,15 @@ const HeroSection = () => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
+      <h1 className='sr-only'>Manor Laundromat — Self-Service Laundry in Lancaster, PA</h1>
       <div className='md:max-w-5xl md:mx-auto'>
         {/* Image container — full width on mobile, contained on desktop */}
         <div className='relative w-full h-[min(75vw,calc(100svh-220px))] overflow-hidden'>
           {slides.map((slide, index) => (
             <Image
-              key={slide}
-              src={slide}
-              alt='Laundry hero background'
+              key={slide.src}
+              src={slide.src}
+              alt={slide.alt}
               fill
               priority={index === 0}
               className={`object-cover object-top transition-opacity duration-700 ${index === activeSlide ? 'opacity-100' : 'opacity-0'}`}
@@ -138,7 +143,7 @@ const HeroSection = () => {
           <div className='pointer-events-none absolute right-0 bottom-4 left-0 z-20 flex items-center justify-center gap-2 md:hidden'>
             {slides.map((slide, index) => (
               <span
-                key={slide}
+                key={slide.src}
                 className={`h-1.5 rounded-full transition-all ${index === activeSlide ? 'w-8 bg-white' : 'w-4 bg-white/55'}`}
                 aria-hidden='true'
               />

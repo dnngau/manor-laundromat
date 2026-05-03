@@ -119,7 +119,7 @@ const featuresList = [
   {
     icon: MapPinIcon,
     title: 'Convenient Lancaster Location',
-    description: 'A conveniently located laundromat with ample parking, minutes from Stone Mill Plaza and Downtown Lancaster.'
+    description: 'Located on Manor Street in Lancaster, PA with ample parking — minutes from Stone Mill Plaza and Downtown Lancaster.'
   }
 ]
 
@@ -129,13 +129,14 @@ export default function Home() {
       <Navbar navigationData={navigationData} hours={businessHours} />
 
       <main className='flex flex-col'>
-        <div className='bg-background'>
+        <div className='bg-background bubble-bg'>
           <HeroSection />
         </div>
+
         <div className="bg-muted">
           <Features featuresList={featuresList} />
         </div>
-        <div className='bg-background'>
+        <div className='bg-background bubble-bg'>
           <Pricing plans={plans} featureKeys={featureKeys} featureLabels={featureLabels} />
         </div>
         <div className='bg-muted'>

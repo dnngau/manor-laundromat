@@ -1,0 +1,33 @@
+# Manor Laundromat
+
+Manor Laundromat is a self-service laundromat located at 876 Manor Street, Lancaster, PA 17603.
+Phone: (717) 925-7480
+Hours: Open daily, 6:00 AM – 10:00 PM
+Website: https://www.manor-laundromat.com
+
+## Services
+
+Self-service washing and drying. Machines accept cash, credit/debit card, and smartphone via an app.
+1
+## Washers
+
+- 30 lb washer: $4.75 per cycle (5 machines) — ideal for everyday laundry and towels
+- 40 lb washer: $6.25 per cycle (10 machines) — ideal for large family loads
+- 60 lb washer: $8.00 per cycle (3 machines) — ideal for comforters and blankets
+- 80 lb washer: $11.00 per cycle (2 machines) — ideal for bulky and oversized items
+
+## Dryers
+
+All dryers hold up to 50 lbs.
+- $1.75 for the first 30 minutes
+- $0.25 per additional 6 minutes
+
+## Amenities
+
+- Free Wi-Fi
+- Comfortable seating
+- Ample on-site parking
+- Climate-controlled space
+- Fully renovated interior
+- Dexter X-Series commercial machines
+- On-site soap vending

@@ -2,6 +2,13 @@ import Navbar from '@/components/shadcn-studio/blocks/navbar-component-03/navbar
 import FAQ from '@/components/shadcn-studio/blocks/faq-component-04/faq-component-04'
 import { businessHours, navigationData } from '@/lib/site-config'
 
+export const metadata = {
+  title: 'FAQ',
+  description:
+    'Frequently asked questions about Manor Laundromat in Lancaster, PA — machine sizes, pricing, payment, and hours.',
+  alternates: { canonical: 'https://www.manor-laundromat.com/faq' },
+}
+
 const tabsData = [
   {
     name: 'General',
@@ -63,13 +70,32 @@ const tabsData = [
   }
 ]
 
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: tabsData.flatMap(tab =>
+    tab.faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    }))
+  ),
+}
+
 export default function FAQPage() {
   return (
-    <div className='min-h-screen bg-background'>
+    <div className='min-h-screen bg-background bubble-bg'>
       <Navbar navigationData={navigationData} hours={businessHours} />
       <main className='bg-background'>
         <FAQ tabs={tabsData} />
       </main>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
     </div>
   )
 }

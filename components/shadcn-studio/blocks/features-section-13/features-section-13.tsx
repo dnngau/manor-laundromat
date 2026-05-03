@@ -14,12 +14,15 @@ const Features = ({ featuresList }: { featuresList: Features }) => {
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         {/* Header */}
         <div className='mb-12 space-y-4 text-center sm:mb-16 lg:mb-24'>
+          <span className='inline-block rounded-full bg-[#106090]/10 px-4 py-1.5 text-sm font-semibold text-[#106090] uppercase tracking-wider'>
+            Why Manor Laundromat
+          </span>
           <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>
             A Better Laundromat Experience in Lancaster, PA
           </h2>
 
           <p className='text-muted-foreground mx-auto max-w-3xl text-xl'>
-            A clean, upgraded space with large-capacity machines and simple amenities designed to make laundry easier.
+            A clean, upgraded self-service laundry with large-capacity machines and simple amenities designed to make laundry day easier.
           </p>
         </div>
 
@@ -27,10 +30,10 @@ const Features = ({ featuresList }: { featuresList: Features }) => {
         <div className='grid gap-6 sm:grid-cols-2 lg:grid-cols-3'>
           {featuresList.map((feature, index) => (
             <div key={index}>
-              <Card className='hover:border-primary h-full border shadow-none transition-colors duration-300'>
+              <Card className='hover:border-[#106090] hover:shadow-md h-full border shadow-none transition-all duration-300'>
                 <CardContent className='flex gap-4'>
-                  <Avatar className='size-9 rounded-md'>
-                    <AvatarFallback className='bg-card-foreground/10 text-card-foreground rounded-md [&>svg]:size-6'>
+                  <Avatar className='size-10 rounded-lg shrink-0'>
+                    <AvatarFallback className='bg-[#106090]/10 text-[#106090] rounded-lg [&>svg]:size-5'>
                       <feature.icon />
                     </AvatarFallback>
                   </Avatar>

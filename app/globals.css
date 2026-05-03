@@ -55,18 +55,18 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --primary: oklch(0.42 0.09 228);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.94 0.025 220);
+  --secondary-foreground: oklch(0.32 0.09 228);
+  --muted: oklch(0.965 0.012 220);
+  --muted-foreground: oklch(0.42 0.02 228);
+  --accent: oklch(0.94 0.025 220);
+  --accent-foreground: oklch(0.32 0.09 228);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: oklch(0.91 0.015 220);
+  --input: oklch(0.91 0.015 220);
+  --ring: oklch(0.42 0.09 228);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -123,4 +123,9 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.bubble-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500'%3E%3Cdefs%3E%3CradialGradient id='b' cx='0.35' cy='0.32' r='0.65'%3E%3Cstop offset='0' stop-color='rgba(220,240,255,0.45)'/%3E%3Cstop offset='1' stop-color='rgba(16,96,144,0.06)'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='67' cy='75' r='17' fill='url(%23b)' stroke='rgba(16,96,144,0.24)' stroke-width='1.2'/%3E%3Ccircle cx='283' cy='43' r='11' fill='url(%23b)' stroke='rgba(16,96,144,0.22)' stroke-width='1'/%3E%3Ccircle cx='426' cy='123' r='7' fill='url(%23b)' stroke='rgba(16,96,144,0.28)' stroke-width='0.8'/%3E%3Ccircle cx='38' cy='298' r='14' fill='url(%23b)' stroke='rgba(16,96,144,0.2)' stroke-width='1.1'/%3E%3Ccircle cx='223' cy='235' r='9' fill='url(%23b)' stroke='rgba(16,96,144,0.23)' stroke-width='0.9'/%3E%3Ccircle cx='145' cy='152' r='6' fill='url(%23b)' stroke='rgba(16,96,144,0.28)' stroke-width='0.8'/%3E%3Ccircle cx='382' cy='340' r='12' fill='url(%23b)' stroke='rgba(16,96,144,0.2)' stroke-width='1'/%3E%3Ccircle cx='165' cy='413' r='8' fill='url(%23b)' stroke='rgba(16,96,144,0.24)' stroke-width='0.8'/%3E%3Ccircle cx='457' cy='232' r='6' fill='url(%23b)' stroke='rgba(16,96,144,0.27)' stroke-width='0.8'/%3E%3Ccircle cx='323' cy='388' r='4' fill='url(%23b)' stroke='rgba(16,96,144,0.3)' stroke-width='0.7'/%3E%3C/svg%3E");
+  background-size: 500px 500px;
 }
