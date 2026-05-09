@@ -1,9 +1,10 @@
 'use client'
 
 import { type TouchEvent, useCallback, useEffect, useRef, useState } from 'react'
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
+import { ChevronLeftIcon, ChevronRightIcon, ClockIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
+import { businessHours } from '@/lib/site-config'
 
 const slides = [
   { src: '/hero-carousel-1.jpeg', alt: 'Exterior storefront of Manor Laundromat at 876 Manor Street, Lancaster PA, with open sign and parking' },
@@ -175,21 +176,27 @@ const HeroSection = () => {
         </div>
 
         {/* Action buttons — below image on mobile only */}
-        <div className='flex flex-wrap justify-center gap-3 py-4 px-4 md:hidden'>
-          <Button
-            asChild
-            size='lg'
-            className='group relative min-w-[164px] overflow-hidden rounded-lg text-base before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:transition-[background-position_0s_ease] before:duration-1000 hover:before:bg-[position:-100%_0,0_0] has-[>svg]:px-6 dark:before:bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.2)_50%,transparent_75%,transparent_100%)]'
-          >
-            <a href='https://maps.app.goo.gl/y92K6Nwp8c91Cg1k8'>Get Directions</a>
-          </Button>
-          <Button
-            className='min-w-[164px] rounded-lg border border-slate-200 bg-white text-slate-900 hover:bg-slate-50'
-            size='lg'
-            asChild
-          >
-            <a href='/photos'>View More Photos</a>
-          </Button>
+        <div className='flex flex-col items-center gap-3 py-4 px-4 md:hidden'>
+          <p className='flex items-center gap-1.5 text-lg font-bold text-muted-foreground'>
+            <ClockIcon className='size-4 shrink-0' aria-hidden='true' />
+            {businessHours.label} <time dateTime={businessHours.startTime}>{businessHours.startLabel}</time> – <time dateTime={businessHours.endTime}>{businessHours.endLabel}</time>
+          </p>
+          <div className='flex flex-wrap justify-center gap-3'>
+            <Button
+              asChild
+              size='lg'
+              className='group relative min-w-[164px] overflow-hidden rounded-lg text-base before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:transition-[background-position_0s_ease] before:duration-1000 hover:before:bg-[position:-100%_0,0_0] has-[>svg]:px-6 dark:before:bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.2)_50%,transparent_75%,transparent_100%)]'
+            >
+              <a href='https://maps.app.goo.gl/y92K6Nwp8c91Cg1k8'>Get Directions</a>
+            </Button>
+            <Button
+              className='min-w-[164px] rounded-lg border border-slate-200 bg-white text-slate-900 hover:bg-slate-50'
+              size='lg'
+              asChild
+            >
+              <a href='/photos'>View More Photos</a>
+            </Button>
+          </div>
         </div>
       </div>
     </section>

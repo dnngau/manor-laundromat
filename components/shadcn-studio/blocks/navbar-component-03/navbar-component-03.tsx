@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { type MouseEvent, useEffect, useState, useSyncExternalStore } from 'react'
-import { InstagramIcon, MapPinIcon, MenuIcon, PhoneIcon } from 'lucide-react'
+import { ClockIcon, InstagramIcon, MapPinIcon, MenuIcon, PhoneIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -105,8 +105,9 @@ const Navbar = ({
 
   return (
     <header className='bg-background sticky top-0 z-50'>
-      <div className='flex w-full items-center justify-between gap-4 bg-[#106090] px-4 py-3 text-[#f5fbff] sm:gap-8 sm:px-6'>
-        <div className='flex items-center gap-6 text-sm font-medium sm:text-base'>
+      <div className='relative flex w-full items-center gap-4 bg-[#106090] px-4 py-3 text-[#f5fbff] sm:gap-8 sm:px-6'>
+        <div className='flex items-center gap-2 text-sm font-bold sm:text-base md:absolute md:left-1/2 md:-translate-x-1/2'>
+          <ClockIcon className='size-4 shrink-0' aria-hidden='true' />
           <span>
             {hours.label}{' '}
             <time dateTime={hours.startTime}>{hours.startLabel}</time> –{' '}
@@ -114,7 +115,7 @@ const Navbar = ({
           </span>
         </div>
 
-        <div className='flex items-center gap-4'>
+        <div className='ml-auto flex items-center gap-4'>
           <a
             href='https://maps.app.goo.gl/y92K6Nwp8c91Cg1k8'
             className='text-[#f5fbff] hover:text-white'
