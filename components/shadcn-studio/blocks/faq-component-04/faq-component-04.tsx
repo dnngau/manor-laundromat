@@ -18,6 +18,42 @@ type Tabs = {
   faqs: FAQItem
 }[]
 
+function renderAnswer(answer: string) {
+  const parts = answer.split(/(\{\{instagram\}\}|\(\d{3}\) \d{3}-\d{4})/)
+  if (parts.length === 1) return <>{answer}</>
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (part === '{{instagram}}') {
+          return (
+            <a
+              key={i}
+              href='https://www.instagram.com/manor_laundromat/'
+              target='_blank'
+              rel='noopener noreferrer'
+              className='text-foreground font-semibold hover:underline'
+            >
+              @manor_laundromat
+            </a>
+          )
+        }
+        if (/^\(\d{3}\) \d{3}-\d{4}$/.test(part)) {
+          return (
+            <a
+              key={i}
+              href={`tel:${part.replace(/\D/g, '')}`}
+              className='text-foreground font-semibold hover:underline'
+            >
+              {part}
+            </a>
+          )
+        }
+        return <span key={i}>{part}</span>
+      })}
+    </>
+  )
+}
+
 const FAQ = ({ tabs }: { tabs: Tabs }) => {
   const { language } = useLanguage()
   const t = translations[language]
@@ -53,7 +89,7 @@ const FAQ = ({ tabs }: { tabs: Tabs }) => {
                     <AccordionTrigger className='px-5 text-base [&>svg]:rotate-90 [&[data-state=open]>svg]:rotate-0'>
                       {item.question}
                     </AccordionTrigger>
-                    <AccordionContent className='text-muted-foreground px-5 text-base'>{item.answer}</AccordionContent>
+                    <AccordionContent className='text-muted-foreground px-5 text-base'>{renderAnswer(item.answer)}</AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
