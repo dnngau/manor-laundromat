@@ -50,7 +50,7 @@ const Pricing = () => {
     <div className='bg-background container mx-auto max-w-7xl py-8 sm:py-16 lg:py-24'>
       <div className='space-y-12 px-4 sm:space-y-16 sm:px-6 lg:space-y-24 lg:px-8'>
         <div className='flex flex-col items-center gap-4'>
-          <h2 id='machines-pricing-heading' className='text-2xl font-semibold sm:text-3xl lg:text-4xl'>
+          <h2 id='machines-pricing-heading' className='text-center text-2xl font-semibold sm:text-3xl lg:text-4xl'>
             {t.pricing.heading}
           </h2>
           <p className='text-muted-foreground text-center text-lg sm:text-xl'>
