@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ScrollRestoration from "@/components/ui/scroll-restoration";
 import Footer from "@/components/ui/footer";
+import { LanguageProvider } from "@/lib/language-context";
 
 export const metadata: Metadata = {
   title: {
@@ -95,9 +96,11 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased flex flex-col min-h-screen">
-        <ScrollRestoration />
-        {children}
-        <Footer />
+        <LanguageProvider>
+          <ScrollRestoration />
+          {children}
+          <Footer />
+        </LanguageProvider>
       </body>
     </html>
   );

@@ -1,28 +1,37 @@
-import type { ComponentType } from 'react'
+'use client'
+
+import { WashingMachineIcon, SparklesIcon, CreditCardIcon, ZapIcon, WifiIcon, MapPinIcon } from 'lucide-react'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Card, CardContent } from '@/components/ui/card'
+import { useLanguage } from '@/lib/language-context'
+import { translations } from '@/lib/translations'
 
-type Features = {
-  icon: ComponentType<{ className?: string }>
-  title: string
-  description: string
-}[]
+const featureIcons = [WashingMachineIcon, SparklesIcon, CreditCardIcon, ZapIcon, WifiIcon, MapPinIcon]
 
-const Features = ({ featuresList }: { featuresList: Features }) => {
+const Features = () => {
+  const { language } = useLanguage()
+  const t = translations[language]
+
+  const featuresList = t.features.items.map((item, i) => ({
+    icon: featureIcons[i],
+    title: item.title,
+    description: item.description,
+  }))
+
   return (
     <section className='py-8 sm:py-16 lg:py-24'>
       <div className='mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
         {/* Header */}
         <div className='mb-12 space-y-4 text-center sm:mb-16 lg:mb-24'>
           <span className='inline-block rounded-full bg-[#106090]/10 px-4 py-1.5 text-sm font-semibold text-[#106090] uppercase tracking-wider'>
-            Why Manor Laundromat
+            {t.features.badge}
           </span>
           <h2 className='text-2xl font-semibold md:text-3xl lg:text-4xl'>
-            A Better Laundromat Experience in Lancaster, PA
+            {t.features.heading}
           </h2>
 
           <p className='text-muted-foreground mx-auto max-w-3xl text-xl'>
-            A clean, upgraded self-service laundry with large-capacity machines and simple amenities designed to make laundry day easier.
+            {t.features.subheading}
           </p>
         </div>
 

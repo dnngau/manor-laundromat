@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { type MouseEvent, useEffect, useState, useSyncExternalStore } from 'react'
-import { ClockIcon, InstagramIcon, MapPinIcon, MenuIcon, PhoneIcon } from 'lucide-react'
+import { ClockIcon, GlobeIcon, InstagramIcon, MapPinIcon, MenuIcon, PhoneIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -15,6 +15,8 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
+import { useLanguage } from '@/lib/language-context'
+import { translations } from '@/lib/translations'
 
 type HoursItem = {
   label: string
@@ -22,6 +24,8 @@ type HoursItem = {
   endTime: string
   startLabel: string
   endLabel: string
+  startLabelShort?: string
+  endLabelShort?: string
 }
 
 type NavigationItem = {
@@ -43,6 +47,8 @@ const Navbar = ({
     () => true,
     () => false
   )
+  const { language, toggleLanguage } = useLanguage()
+  const t = translations[language]
 
   useEffect(() => {
     const syncHash = () => setCurrentHash(window.location.hash)
@@ -103,19 +109,40 @@ const Navbar = ({
     window.scrollTo({ top: Math.max(targetTop, 0), left: 0, behavior: 'auto' })
   }
 
+  const getNavTitle = (item: { title: string; href: string }) =>
+    t.nav[item.href as keyof typeof t.nav] ?? item.title
+
   return (
     <header className='bg-background sticky top-0 z-50'>
       <div className='relative flex w-full items-center gap-4 bg-[#106090] px-4 py-3 text-[#f5fbff] sm:gap-8 sm:px-6'>
         <div className='flex items-center gap-2 text-sm font-bold sm:text-base md:absolute md:left-1/2 md:-translate-x-1/2'>
           <ClockIcon className='size-4 shrink-0' aria-hidden='true' />
-          <span>
-            {hours.label}{' '}
-            <time dateTime={hours.startTime}>{hours.startLabel}</time> –{' '}
-            <time dateTime={hours.endTime}>{hours.endLabel}</time>
+          <span className='flex flex-col sm:flex-row sm:gap-1'>
+            <span>{t.hoursLabel}</span>
+            <span>
+              <time dateTime={hours.startTime}>
+                <span className='sm:hidden'>{hours.startLabelShort ?? hours.startLabel}</span>
+                <span className='hidden sm:inline'>{hours.startLabel}</span>
+              </time>
+              {' '}–{' '}
+              <time dateTime={hours.endTime}>
+                <span className='sm:hidden'>{hours.endLabelShort ?? hours.endLabel}</span>
+                <span className='hidden sm:inline'>{hours.endLabel}</span>
+              </time>
+            </span>
           </span>
         </div>
 
         <div className='ml-auto flex items-center gap-4'>
+          <button
+            onClick={toggleLanguage}
+            className='flex items-center gap-1.5 text-sm font-semibold text-[#f5fbff] hover:text-white transition-colors'
+            aria-label={language === 'en' ? 'Switch to Spanish' : 'Switch to English'}
+          >
+            <GlobeIcon className='size-4' aria-hidden='true' />
+            {t.languageToggle}
+          </button>
+          <Separator orientation='vertical' className='!h-4 bg-white/30' />
           <a
             href='https://maps.app.goo.gl/y92K6Nwp8c91Cg1k8'
             className='text-[#f5fbff] hover:text-white'
@@ -175,7 +202,7 @@ const Navbar = ({
                     'text-primary font-semibold': isActiveLink(item.href)
                   })}
                 >
-                  {item.title}
+                  {getNavTitle(item)}
                 </Link>
 
                 {index < navigationData.length - 1 && (
@@ -203,7 +230,7 @@ const Navbar = ({
                       })}
                     >
                       <Link href={item.href} onClick={event => handleNavClick(event, item.href)}>
-                        {item.title}
+                        {getNavTitle(item)}
                       </Link>
                     </DropdownMenuItem>
                   </DropdownMenuGroup>

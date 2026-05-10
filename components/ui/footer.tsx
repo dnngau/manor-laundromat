@@ -1,13 +1,15 @@
-import Link from 'next/link'
+'use client'
 
-const links = [
-  { title: 'Home', href: '/' },
-  { title: 'Hours & Location', href: '/hours-location' },
-  { title: 'FAQ', href: '/faq' },
-  { title: 'Contact', href: '/contact' },
-]
+import Link from 'next/link'
+import { useLanguage } from '@/lib/language-context'
+import { translations } from '@/lib/translations'
+
+const linkHrefs = ['/', '/hours-location', '/faq', '/contact']
 
 export default function Footer() {
+  const { language } = useLanguage()
+  const t = translations[language]
+
   return (
     <footer className='bg-[#0d3d5c] text-white mt-auto'>
       <div className='mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8'>
@@ -31,15 +33,15 @@ export default function Footer() {
             >
               (717) 925-7480
             </a>
-            <span className='text-white/60'>Open Daily: 6:00 AM – 10:00 PM</span>
+            <span className='text-white/60'>{t.footer.openDaily}</span>
           </div>
 
           <nav aria-label='Footer navigation'>
             <ul className='flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/60'>
-              {links.map(link => (
-                <li key={link.href}>
-                  <Link href={link.href} className='hover:text-white transition-colors'>
-                    {link.title}
+              {linkHrefs.map(href => (
+                <li key={href}>
+                  <Link href={href} className='hover:text-white transition-colors'>
+                    {t.footer.links[href]}
                   </Link>
                 </li>
               ))}
@@ -49,7 +51,7 @@ export default function Footer() {
         </div>
 
         <p className='mt-8 text-xs text-white/40'>
-          &copy; {new Date().getFullYear()} Manor Laundromat. All rights reserved.
+          &copy; {new Date().getFullYear()} Manor Laundromat. {t.footer.rights}
         </p>
       </div>
     </footer>

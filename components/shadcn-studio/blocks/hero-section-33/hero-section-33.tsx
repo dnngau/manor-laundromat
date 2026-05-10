@@ -5,6 +5,8 @@ import { ChevronLeftIcon, ChevronRightIcon, ClockIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { businessHours } from '@/lib/site-config'
+import { useLanguage } from '@/lib/language-context'
+import { translations } from '@/lib/translations'
 
 const slides = [
   { src: '/hero-carousel-1.jpeg', alt: 'Exterior storefront of Manor Laundromat at 876 Manor Street, Lancaster PA, with open sign and parking' },
@@ -17,6 +19,8 @@ const HeroSection = () => {
   const touchStartX = useRef<number | null>(null)
   const touchEndX = useRef<number | null>(null)
   const autoAdvanceTimer = useRef<number | null>(null)
+  const { language } = useLanguage()
+  const t = translations[language]
 
   const restartAutoAdvance = useCallback(() => {
     if (autoAdvanceTimer.current !== null) {
@@ -128,14 +132,14 @@ const HeroSection = () => {
                 size='lg'
                 className='group relative min-w-[164px] overflow-hidden rounded-lg text-base before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:transition-[background-position_0s_ease] before:duration-1000 hover:before:bg-[position:-100%_0,0_0] has-[>svg]:px-6 dark:before:bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.2)_50%,transparent_75%,transparent_100%)]'
               >
-                <a href='https://maps.app.goo.gl/y92K6Nwp8c91Cg1k8'>Get Directions</a>
+                <a href='https://maps.app.goo.gl/y92K6Nwp8c91Cg1k8'>{t.hero.getDirections}</a>
               </Button>
               <Button
                 className='min-w-[164px] rounded-lg bg-white/90 text-slate-900 hover:bg-white'
                 size='lg'
                 asChild
               >
-                <a href='/photos'>View More Photos</a>
+                <a href='/photos'>{t.hero.viewMorePhotos}</a>
               </Button>
             </div>
           </div>
@@ -156,7 +160,7 @@ const HeroSection = () => {
             <button
               type='button'
               onClick={() => goToPreviousSlide(true)}
-              aria-label='Previous photo'
+              aria-label={t.hero.prevPhoto}
               className='inline-flex size-8 items-center justify-center rounded-full bg-black/45 transition-colors hover:bg-black/65'
             >
               <ChevronLeftIcon className='size-4' />
@@ -167,7 +171,7 @@ const HeroSection = () => {
             <button
               type='button'
               onClick={() => goToNextSlide(true)}
-              aria-label='Next photo'
+              aria-label={t.hero.nextPhoto}
               className='inline-flex size-8 items-center justify-center rounded-full bg-black/45 transition-colors hover:bg-black/65'
             >
               <ChevronRightIcon className='size-4' />
@@ -179,7 +183,7 @@ const HeroSection = () => {
         <div className='flex flex-col items-center gap-3 py-4 px-4 md:hidden'>
           <p className='flex items-center gap-1.5 text-lg font-bold text-muted-foreground'>
             <ClockIcon className='size-4 shrink-0' aria-hidden='true' />
-            {businessHours.label} <time dateTime={businessHours.startTime}>{businessHours.startLabel}</time> – <time dateTime={businessHours.endTime}>{businessHours.endLabel}</time>
+            {t.hoursLabel} <time dateTime={businessHours.startTime}>{businessHours.startLabel}</time> – <time dateTime={businessHours.endTime}>{businessHours.endLabel}</time>
           </p>
           <div className='flex flex-wrap justify-center gap-3'>
             <Button
@@ -187,14 +191,14 @@ const HeroSection = () => {
               size='lg'
               className='group relative min-w-[164px] overflow-hidden rounded-lg text-base before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.5)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:transition-[background-position_0s_ease] before:duration-1000 hover:before:bg-[position:-100%_0,0_0] has-[>svg]:px-6 dark:before:bg-[linear-gradient(45deg,transparent_25%,rgba(0,0,0,0.2)_50%,transparent_75%,transparent_100%)]'
             >
-              <a href='https://maps.app.goo.gl/y92K6Nwp8c91Cg1k8'>Get Directions</a>
+              <a href='https://maps.app.goo.gl/y92K6Nwp8c91Cg1k8'>{t.hero.getDirections}</a>
             </Button>
             <Button
               className='min-w-[164px] rounded-lg border border-slate-200 bg-white text-slate-900 hover:bg-slate-50'
               size='lg'
               asChild
             >
-              <a href='/photos'>View More Photos</a>
+              <a href='/photos'>{t.hero.viewMorePhotos}</a>
             </Button>
           </div>
         </div>

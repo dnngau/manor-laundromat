@@ -3,7 +3,9 @@ export const businessHours = {
   startTime: '06:00',
   endTime: '22:00',
   startLabel: '6:00 AM',
-  endLabel: '10:00 PM'
+  endLabel: '10:00 PM',
+  startLabelShort: '6 AM',
+  endLabelShort: '10 PM'
 }
 
 export const navigationData = [

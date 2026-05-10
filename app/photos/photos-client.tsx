@@ -5,6 +5,8 @@ import Image from 'next/image'
 import Navbar from '@/components/shadcn-studio/blocks/navbar-component-03/navbar-component-03'
 import { businessHours, navigationData } from '@/lib/site-config'
 import { XIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
+import { useLanguage } from '@/lib/language-context'
+import { translations } from '@/lib/translations'
 
 const photos = [
   { src: '/gallery/IMG_0889.jpeg', alt: 'Exterior storefront of Manor Laundromat at 876 Manor Street, Lancaster PA with open sign' },
@@ -16,6 +18,8 @@ const photos = [
 
 export default function PhotosClient() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const { language } = useLanguage()
+  const t = translations[language]
 
   const closeLightbox = () => setLightboxIndex(null)
 
@@ -43,7 +47,7 @@ export default function PhotosClient() {
       <Navbar navigationData={navigationData} hours={businessHours} />
 
       <main className='mx-auto max-w-5xl bg-background px-4 py-12 sm:px-6 lg:px-8'>
-        <h1 className='mb-8 text-3xl font-semibold'>Photos - Take a Look Inside!</h1>
+        <h1 className='mb-8 text-3xl font-semibold'>{t.photos.heading}</h1>
 
         <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4'>
           {photos.map((photo, i) => (
@@ -72,7 +76,7 @@ export default function PhotosClient() {
           <button
             onClick={e => { e.stopPropagation(); prev() }}
             className='absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white hover:bg-white/25 sm:left-6'
-            aria-label='Previous photo'
+            aria-label={t.photos.prevPhoto}
           >
             <ChevronLeftIcon className='size-7' />
           </button>
@@ -94,7 +98,7 @@ export default function PhotosClient() {
           <button
             onClick={e => { e.stopPropagation(); next() }}
             className='absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-2 text-white hover:bg-white/25 sm:right-6'
-            aria-label='Next photo'
+            aria-label={t.photos.nextPhoto}
           >
             <ChevronRightIcon className='size-7' />
           </button>
@@ -102,7 +106,7 @@ export default function PhotosClient() {
           <button
             onClick={closeLightbox}
             className='absolute right-3 top-3 rounded-full bg-white/10 p-2 text-white hover:bg-white/25 sm:right-6 sm:top-6'
-            aria-label='Close'
+            aria-label={t.photos.close}
           >
             <XIcon className='size-5' />
           </button>
