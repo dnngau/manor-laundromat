@@ -32,7 +32,7 @@ export default function Home() {
         <div className='bg-muted'>
           <div className='container mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-16 lg:px-8 lg:py-24'>
             <div className='flex flex-col items-center gap-4'>
-              <h2 className='text-2xl font-semibold sm:text-3xl lg:text-4xl'>{t.dryers.heading}</h2>
+              <h2 className='text-center text-2xl font-semibold sm:text-3xl lg:text-4xl'>{t.dryers.heading}</h2>
               <p className='text-muted-foreground text-center text-lg sm:text-xl'>{t.dryers.subheading}</p>
             </div>
             <div className='mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6'>

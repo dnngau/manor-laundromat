@@ -1,7 +1,6 @@
 'use client'
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
-import { flushSync } from 'react-dom'
 
 export type Language = 'en' | 'es'
 
@@ -28,33 +27,40 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, [language])
 
   const toggleLanguage = () => {
-    // Find the first element at or just below the top of the viewport to use as a scroll anchor
-    const candidates = document.querySelectorAll('[id], h1, h2, h3, h4, section')
-    let anchor: { el: Element; top: number } | null = null
-    for (const el of candidates) {
+    // Find the first heading that is clearly visible below the sticky header.
+    // We store its absolute position (viewport-relative top + scrollY) so the
+    // measurement is independent of any scroll that happens during re-render.
+    const stickyHeader = document.querySelector('header.sticky') as HTMLElement | null
+    const headerBottom = stickyHeader ? stickyHeader.getBoundingClientRect().bottom : 0
+
+    let anchor: { el: Element; absTop: number } | null = null
+    for (const el of document.querySelectorAll('h1, h2, h3, h4')) {
       const rect = el.getBoundingClientRect()
-      if (rect.top >= -1 && rect.bottom > 0) {
-        anchor = { el, top: rect.top }
+      if (rect.top > headerBottom && rect.top < window.innerHeight) {
+        anchor = { el, absTop: rect.top + window.scrollY }
         break
       }
     }
 
-    // flushSync forces React to render synchronously so the DOM reflects the
-    // new language before we read getBoundingClientRect and call scrollBy.
-    // This runs entirely before the browser paints, preventing the visible jump
-    // that useLayoutEffect + async compositor scroll caused on real mobile.
-    flushSync(() => {
-      setLanguage(prev => {
-        const next = prev === 'en' ? 'es' : 'en'
-        localStorage.setItem('ml-language', next)
-        return next
-      })
+    setLanguage(prev => {
+      const next = prev === 'en' ? 'es' : 'en'
+      localStorage.setItem('ml-language', next)
+      return next
     })
 
-    if (anchor) {
-      const newTop = anchor.el.getBoundingClientRect().top
-      window.scrollBy(0, newTop - anchor.top)
-    }
+    if (!anchor) return
+    const { el, absTop: prevAbsTop } = anchor
+
+    // rAF fires after the browser has reflowed the new layout, making
+    // getBoundingClientRect() accurate. We then scroll to compensate for any
+    // height change that occurred above our anchor element.
+    requestAnimationFrame(() => {
+      const newAbsTop = el.getBoundingClientRect().top + window.scrollY
+      const delta = newAbsTop - prevAbsTop
+      if (Math.abs(delta) > 0.5) {
+        window.scrollTo({ top: window.scrollY + delta, behavior: 'instant' })
+      }
+    })
   }
 
   return (
