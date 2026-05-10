@@ -70,7 +70,7 @@ const Pricing = () => {
             <TabsList className='bg-muted h-auto w-full flex-nowrap gap-1 rounded-2xl p-1.5'>
               {plans.map(plan => (
                 <TabsTrigger
-                  key={plan.name}
+                  key={plan.name.match(/(\d+)/)?.[1] ?? plan.name}
                   value={plan.name}
                   className='data-[state=active]:bg-background data-[state=active]:text-foreground h-11 min-w-0 flex-1 rounded-xl border-0 px-1.5 py-2 text-center text-[15px] font-semibold whitespace-nowrap data-[state=active]:shadow-sm'
                 >
@@ -80,7 +80,7 @@ const Pricing = () => {
             </TabsList>
 
             {plans.map(plan => (
-              <TabsContent key={plan.name} value={plan.name}>
+              <TabsContent key={plan.name.match(/(\d+)/)?.[1] ?? plan.name} value={plan.name}>
                 <div className='border-border bg-card overflow-hidden rounded-3xl border shadow-sm'>
                   <div
                     className={cn('border-border border-b px-6 py-6 text-center', {

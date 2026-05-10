@@ -20,19 +20,12 @@ export const metadata: Metadata = {
     title: "Manor Laundromat | Laundromat in Lancaster, PA",
     description:
       "Self-service laundromat in Lancaster, PA. Open daily 6AM–10PM. Large-capacity Dexter washers (30–80 lb), dryers, free Wi-Fi, card & cash payment. 876 Manor Street.",
-    images: [
-      {
-        url: "https://www.manor-laundromat.com/ManorLaundromat_Logo.png",
-        alt: "Manor Laundromat logo",
-      },
-    ],
   },
   twitter: {
     card: "summary",
     title: "Manor Laundromat | Laundromat in Lancaster, PA",
     description:
       "Self-service laundromat in Lancaster, PA. Open daily 6AM–10PM. Large-capacity Dexter washers (30–80 lb), dryers, free Wi-Fi, card & cash payment.",
-    images: ["https://www.manor-laundromat.com/ManorLaundromat_Logo.png"],
   },
 };
 
