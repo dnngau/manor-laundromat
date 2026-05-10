@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { CircleCheckIcon } from 'lucide-react'
 
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
@@ -14,6 +15,9 @@ const Pricing = () => {
   const t = translations[language]
 
   const { plans, featureLabels, featureKeys, planSizeLabels, washerLabel } = t.pricing
+
+  const [selectedWeight, setSelectedWeight] = useState(() => plans[0]?.name.match(/(\d+)/)?.[1] ?? '30')
+  const currentTabValue = plans.find(p => p.name.match(/(\d+)/)?.[1] === selectedWeight)?.name ?? plans[0]?.name
 
   const formatFeatureValue = (featureValue: string | number | boolean) => {
     if (featureValue === true) {
@@ -55,7 +59,14 @@ const Pricing = () => {
         </div>
 
         <div className='md:hidden'>
-          <Tabs defaultValue={plans[0]?.name} className='gap-6'>
+          <Tabs
+            value={currentTabValue}
+            onValueChange={val => {
+              const match = val.match(/(\d+)/)
+              if (match) setSelectedWeight(match[1])
+            }}
+            className='gap-6'
+          >
             <TabsList className='bg-muted h-auto w-full flex-nowrap gap-1 rounded-2xl p-1.5'>
               {plans.map(plan => (
                 <TabsTrigger
