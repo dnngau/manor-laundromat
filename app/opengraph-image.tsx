@@ -23,7 +23,7 @@ export default async function Image() {
           padding: '80px',
         }}
       >
-        <img src={logoSrc} style={{ maxWidth: '900px', objectFit: 'contain' }} />
+        <img src={logoSrc} alt="" style={{ maxWidth: '900px', objectFit: 'contain' }} />
       </div>
     ),
     size,
