@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useSyncExternalStore, type ReactNode } from 'react'
 
 export type Language = 'en' | 'es'
 
@@ -14,13 +14,48 @@ const LanguageContext = createContext<LanguageContextType>({
   toggleLanguage: () => {},
 })
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>('en')
+// The chosen language lives in localStorage. It is exposed to React through
+// useSyncExternalStore so the client can read it on first render instead of
+// setting state from an effect after mount. The server always renders 'en';
+// React swaps in the stored value right after hydration.
+const STORAGE_KEY = 'ml-language'
+const listeners = new Set<() => void>()
+let fallback: Language = 'en' // used when localStorage is unavailable
 
-  useEffect(() => {
-    const stored = localStorage.getItem('ml-language') as Language | null
-    if (stored === 'en' || stored === 'es') setLanguage(stored)
-  }, [])
+function readLanguage(): Language {
+  try {
+    return localStorage.getItem(STORAGE_KEY) === 'es' ? 'es' : 'en'
+  } catch {
+    return fallback
+  }
+}
+
+function readServerLanguage(): Language {
+  return 'en'
+}
+
+function subscribe(callback: () => void) {
+  listeners.add(callback)
+  // Also react to changes made in another open tab.
+  window.addEventListener('storage', callback)
+  return () => {
+    listeners.delete(callback)
+    window.removeEventListener('storage', callback)
+  }
+}
+
+function writeLanguage(next: Language) {
+  fallback = next
+  try {
+    localStorage.setItem(STORAGE_KEY, next)
+  } catch {
+    // Private mode or blocked storage: the choice applies for this page only.
+  }
+  listeners.forEach(notify => notify())
+}
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const language = useSyncExternalStore(subscribe, readLanguage, readServerLanguage)
 
   useEffect(() => {
     document.documentElement.lang = language
@@ -42,11 +77,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       }
     }
 
-    setLanguage(prev => {
-      const next = prev === 'en' ? 'es' : 'en'
-      localStorage.setItem('ml-language', next)
-      return next
-    })
+    writeLanguage(language === 'en' ? 'es' : 'en')
 
     if (!anchor) return
     const { el, absTop: prevAbsTop } = anchor

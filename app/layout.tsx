@@ -5,6 +5,7 @@ import Footer from "@/components/ui/footer";
 import { LanguageProvider } from "@/lib/language-context";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.manor-laundromat.com"),
   title: {
     default: "Manor Laundromat | Laundromat in Lancaster, PA",
     template: "%s | Manor Laundromat Lancaster, PA",
