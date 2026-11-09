@@ -23,8 +23,8 @@ export default function Home() {
           <HeroSection />
         </div>
 
-        <div className="bg-muted">
-          <Features />
+        <div className='bg-muted'>
+          <Testimonials />
         </div>
 
         <div className='bg-background bubble-bg'>
@@ -57,7 +57,7 @@ export default function Home() {
         </div>
 
         <div className='bg-muted'>
-          <Testimonials />
+          <Features />
         </div>
       </main>
     </div>
