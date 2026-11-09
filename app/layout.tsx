@@ -23,7 +23,7 @@ export const metadata: Metadata = {
       "Self-service laundromat in Lancaster, PA. Open daily 6AM–10PM. Large-capacity Dexter washers (30–80 lb), dryers, free Wi-Fi, card & cash payment. 876 Manor Street.",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Manor Laundromat | Laundromat in Lancaster, PA",
     description:
       "Self-service laundromat in Lancaster, PA. Open daily 6AM–10PM. Large-capacity Dexter washers (30–80 lb), dryers, free Wi-Fi, card & cash payment.",
@@ -73,7 +73,10 @@ const localBusinessSchema = {
     { "@type": "LocationFeatureSpecification", name: "Card Payment", value: true },
     { "@type": "LocationFeatureSpecification", name: "Climate Control", value: true },
   ],
-  sameAs: ["https://www.instagram.com/manor_laundromat/"],
+  sameAs: [
+    "https://www.instagram.com/manor_laundromat/",
+    "https://www.google.com/maps?cid=16828901185061877771",
+  ],
 };
 
 export default function RootLayout({

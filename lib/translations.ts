@@ -123,6 +123,14 @@ export const translations = {
       minutes30: '30 minutes',
       per6minutes: 'per 6 minutes',
     },
+    bonus: {
+      badge: 'Reload Bonus',
+      heading: 'Load $20, Get $24',
+      subheading: 'Every time you add $20 to your laundry card or the LaundryCat app, we add a $4 bonus. That is 20% more laundry, every reload.',
+      youPay: 'You pay',
+      youGet: 'You get',
+      note: 'Laundry cards are $1 at the kiosk inside. Reload with cash, credit, or debit.',
+    },
     faq: {
       heading: 'Frequently Asked Questions',
       subheading: 'Everything you need to know for a smooth laundry day',
@@ -156,6 +164,15 @@ export const translations = {
           ],
         },
       ],
+    },
+    testimonials: {
+      heading: 'What Our Neighbors Say',
+      subheading: 'Real reviews from Manor Laundromat customers on Google.',
+      ratingOn: 'stars on Google',
+      reviewsLabel: 'reviews',
+      sourceLabel: 'Google review',
+      ctaTitle: 'Enjoyed your visit? Reviews help other Lancaster locals find us.',
+      ctaLink: 'Write a Google Review',
     },
     contact: {
       heading: 'Contact Us',
@@ -323,6 +340,14 @@ export const translations = {
       minutes30: '30 minutos',
       per6minutes: 'por 6 minutos',
     },
+    bonus: {
+      badge: 'Bono de Recarga',
+      heading: 'Cargue $20, Reciba $24',
+      subheading: 'Cada vez que agrega $20 a su tarjeta de lavandería o a la aplicación LaundryCat, le damos un bono de $4. Es 20% más lavado en cada recarga.',
+      youPay: 'Usted paga',
+      youGet: 'Usted recibe',
+      note: 'Las tarjetas de lavandería cuestan $1 en el quiosco adentro. Recargue con efectivo, crédito o débito.',
+    },
     faq: {
       heading: 'Preguntas Frecuentes',
       subheading: 'Todo lo que necesita saber para un día de lavandería sin problemas',
@@ -356,6 +381,15 @@ export const translations = {
           ],
         },
       ],
+    },
+    testimonials: {
+      heading: 'Lo Que Dicen Nuestros Vecinos',
+      subheading: 'Reseñas reales de clientes de Manor Laundromat en Google.',
+      ratingOn: 'estrellas en Google',
+      reviewsLabel: 'reseñas',
+      sourceLabel: 'Reseña de Google',
+      ctaTitle: '¿Disfrutó su visita? Las reseñas ayudan a otros residentes de Lancaster a encontrarnos.',
+      ctaLink: 'Escribir una Reseña en Google',
     },
     contact: {
       heading: 'Contáctenos',

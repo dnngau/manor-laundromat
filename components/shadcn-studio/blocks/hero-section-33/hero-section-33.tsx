@@ -1,10 +1,10 @@
 'use client'
 
 import { type TouchEvent, useCallback, useEffect, useRef, useState } from 'react'
-import { ChevronLeftIcon, ChevronRightIcon, ClockIcon } from 'lucide-react'
+import { ChevronLeftIcon, ChevronRightIcon, ClockIcon, StarIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
-import { businessHours } from '@/lib/site-config'
+import { businessHours, reviewSummary } from '@/lib/site-config'
 import { useLanguage } from '@/lib/language-context'
 import { translations } from '@/lib/translations'
 
@@ -13,6 +13,15 @@ const slides = [
   { src: '/hero-carousel-2.jpeg', alt: 'Row of 40 lb Dexter washers inside Manor Laundromat in Lancaster, PA with seating area' },
   { src: '/hero-carousel-3.jpeg', alt: '60 lb and 80 lb large-capacity Dexter washers at Manor Laundromat, Lancaster PA' },
 ]
+
+const RatingBadge = ({ className, label }: { className: string; label: string }) => (
+  <a href='#reviews-heading' className={className}>
+    <StarIcon className='size-4 shrink-0 fill-current text-amber-500' aria-hidden='true' />
+    <span>
+      {reviewSummary.rating} {label} ({reviewSummary.count})
+    </span>
+  </a>
+)
 
 const HeroSection = () => {
   const [activeSlide, setActiveSlide] = useState(0)
@@ -141,6 +150,10 @@ const HeroSection = () => {
               >
                 <a href='/photos'>{t.hero.viewMorePhotos}</a>
               </Button>
+              <RatingBadge
+                label={t.testimonials.ratingOn}
+                className='ml-auto inline-flex items-center gap-1.5 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition-colors hover:bg-white'
+              />
             </div>
           </div>
 
