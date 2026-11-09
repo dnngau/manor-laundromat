@@ -14,6 +14,8 @@ const photos = [
   { src: '/gallery/IMG_1051.jpeg', alt: '60 lb and 80 lb large-capacity Dexter washers at Manor Laundromat, Lancaster PA' },
   { src: '/gallery/IMG_0871.jpeg', alt: 'Row of 50 lb dryers at Manor Laundromat, Lancaster PA' },
   { src: '/gallery/IMG_0873.jpeg', alt: '30 lb front-load washers at Manor Laundromat in Lancaster, PA' },
+  { src: '/gallery/IMG_2342.jpeg', alt: 'Laundry card kiosk under a "Start Here" sign at Manor Laundromat, Lancaster PA, with English and Spanish instructions' },
+  { src: '/gallery/IMG_1239.jpeg', alt: 'Laundry soap vending machine stocked with Tide, Gain, and Downy next to Dexter stack dryers at Manor Laundromat, Lancaster PA' },
 ]
 
 export default function PhotosClient() {
