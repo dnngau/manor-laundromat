@@ -123,6 +123,14 @@ export const translations = {
       minutes30: '30 minutes',
       per6minutes: 'per 6 minutes',
     },
+    bonus: {
+      badge: 'Reload Bonus',
+      heading: 'Load $20, Get $24',
+      subheading: 'Every time you add $20 to your laundry card or the LaundryCat app, we add a $4 bonus. That is 20% more laundry, every reload.',
+      youPay: 'You pay',
+      youGet: 'You get',
+      note: 'Laundry cards are $1 at the kiosk inside. Reload with cash, credit, or debit.',
+    },
     faq: {
       heading: 'Frequently Asked Questions',
       subheading: 'Everything you need to know for a smooth laundry day',
@@ -322,6 +330,14 @@ export const translations = {
       addTimeLabel: 'Agregar Tiempo',
       minutes30: '30 minutos',
       per6minutes: 'por 6 minutos',
+    },
+    bonus: {
+      badge: 'Bono de Recarga',
+      heading: 'Cargue $20, Reciba $24',
+      subheading: 'Cada vez que agrega $20 a su tarjeta de lavandería o a la aplicación LaundryCat, le damos un bono de $4. Es 20% más lavado en cada recarga.',
+      youPay: 'Usted paga',
+      youGet: 'Usted recibe',
+      note: 'Las tarjetas de lavandería cuestan $1 en el quiosco adentro. Recargue con efectivo, crédito o débito.',
     },
     faq: {
       heading: 'Preguntas Frecuentes',
