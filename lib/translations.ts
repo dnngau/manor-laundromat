@@ -165,6 +165,15 @@ export const translations = {
         },
       ],
     },
+    testimonials: {
+      heading: 'What Our Neighbors Say',
+      subheading: 'Real reviews from Manor Laundromat customers on Google.',
+      ratingOn: 'stars on Google',
+      reviewsLabel: 'reviews',
+      sourceLabel: 'Google review',
+      ctaTitle: 'Enjoyed your visit? Reviews help other Lancaster locals find us.',
+      ctaLink: 'Write a Google Review',
+    },
     contact: {
       heading: 'Contact Us',
       reviewBadge: 'Leave a Review',
@@ -372,6 +381,15 @@ export const translations = {
           ],
         },
       ],
+    },
+    testimonials: {
+      heading: 'Lo Que Dicen Nuestros Vecinos',
+      subheading: 'Reseñas reales de clientes de Manor Laundromat en Google.',
+      ratingOn: 'estrellas en Google',
+      reviewsLabel: 'reseñas',
+      sourceLabel: 'Reseña de Google',
+      ctaTitle: '¿Disfrutó su visita? Las reseñas ayudan a otros residentes de Lancaster a encontrarnos.',
+      ctaLink: 'Escribir una Reseña en Google',
     },
     contact: {
       heading: 'Contáctenos',

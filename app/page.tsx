@@ -5,6 +5,7 @@ import HeroSection from '@/components/shadcn-studio/blocks/hero-section-33/hero-
 import Features from '@/components/shadcn-studio/blocks/features-section-13/features-section-13'
 import Pricing from '@/components/shadcn-studio/blocks/pricing-component-05/pricing-component-05'
 import BonusSection from '@/components/bonus-section'
+import Testimonials from '@/components/shadcn-studio/blocks/testimonials-component-04/testimonials-component-04'
 import { businessHours, navigationData } from '@/lib/site-config'
 import { useLanguage } from '@/lib/language-context'
 import { translations } from '@/lib/translations'
@@ -53,6 +54,10 @@ export default function Home() {
 
         <div className='bg-background bubble-bg'>
           <BonusSection />
+        </div>
+
+        <div className='bg-muted'>
+          <Testimonials />
         </div>
       </main>
     </div>
